@@ -4,6 +4,7 @@ silo.output=function(state)
 {
 	//generate v-based dom here
 }
+silo.v=v
 const {config,input,logic,output,util}=silo
 
 export default silo
