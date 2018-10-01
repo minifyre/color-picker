@@ -40,14 +40,16 @@ output.slider=function(label,opts)
 	return v('.row',{},
 		v('label',{},label),
 		v('button',{},'-'),
-		v('input',{...props,type:'range'}),
+		v('span.gradient',{},
+			v('input',{...props,type:'range'})
+		),
 		v('button',{},'+'),
 		v('input',{...props,type:'number'})
 	)
 }
 output.render=function()
 {
-	
+
 }
 
 export default silo
