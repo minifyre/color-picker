@@ -2,9 +2,12 @@ import silo from './input.mjs'
 import v from './node_modules/v/v.mjs'
 silo.output=function(state)
 {
+	const
+	{r,b,g,a}=state,
+	heading=`rgba(${[r,g,b,a].join(',')})`
 	return [v('style',{},silo.config.css),
 		v('fieldset',{},
-			v('legend',{},'rgba'),
+			v('legend',{},heading),
 			output.slider('Red',{min:0,max:255,value:153}),
 			output.slider('Green',{min:0,max:255,value:153}),
 			output.slider('Blue',{min:0,max:255,value:153}),

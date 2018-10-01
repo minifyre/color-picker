@@ -21,7 +21,7 @@ color.picker=class extends HTMLElement
 		initalState=logic(state)
 		let renderer=x=>x
 		this.state=truth(initalState,(...args)=>renderer(args))
-		this.dom=output(this)
+		this.dom=output(this.state)
 		v.flatUpdate(shadow,this.dom)
 		renderer=()=>output.render(this)
 	}
