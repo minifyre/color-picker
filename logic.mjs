@@ -6,4 +6,6 @@ function logic(opts)
 }
 const silo={config,logic,util}
 
+logic.rgba2hexa=(...args)=>'#'+args.map(num=>num.toString(16)).join('')
+
 export default silo

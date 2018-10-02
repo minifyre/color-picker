@@ -10,6 +10,7 @@ output=function output(editor)
 	update=evt=>input(evt,editor),
 	props=(value,max=255)=>({min:0,max,value,on:{input:update}})
 	return [v('style',{},silo.config.css),
+		v('div',{style:`background-color:${color};`},logic.rgba2hexa(r,g,b,Math.round(a*255/100))),
 		v('fieldset',{},
 			v('legend',{style:`background-color:${color};`},color),
 			output.slider('Red',props(r)),
@@ -51,7 +52,6 @@ named colors
 #rrggbb
 #rrggbbaa
 rgb()
-rgba()
 hsl()
 hsla()
 
