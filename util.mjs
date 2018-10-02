@@ -6,4 +6,19 @@ const util=
 
 	importFiles:paths=>Promise.all(paths.map(x=>fetch(x).then(x=>x.text())))
 }
+
+
+
+util.color={}
+util.color.rgba=(r,g,b,a)=>`rgba(${[r,g,b,a].join(',')})`
+const {rgba}=util.color
+
+util.gradient=(from,to)=>`background-image:linear-gradient(90deg, ${from},${to});`
+util.gradientR=(r,g,b,a)=>util.gradient(rgba(0,g,b,a),rgba(255,g,b,a))
+util.gradientG=(r,g,b,a)=>util.gradient(rgba(r,0,b,a),rgba(r,255,b,a))
+util.gradientB=(r,g,b,a)=>util.gradient(rgba(r,g,0,a),rgba(r,g,255,a))
+util.gradientA=(r,g,b,a)=>util.gradient(rgba(r,g,b,0),rgba(r,g,b,100))
+
+
+
 export default util
