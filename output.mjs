@@ -65,18 +65,19 @@ hwb()
 output.slider=function(label,opts)
 {
 	const
-	props=Object.assign({min:0,max:100,value:50},opts),
-	width=props.max,
-	name=label[0].toLowerCase()
+	name=label[0].toLowerCase(),
+	rangeProps=Object.assign({min:0,max:100,value:50},opts),
+	btnProps={data:{name},on:{pointerdown:input.increment}},
+	width=rangeProps.max
 	return v('.row',{},
 		v('label',{},label),
-		v('button',{},'-'),
+		v('button',{...btnProps,value:-1},'-'),
 		v('span.gradient',{},
 			v('canvas',{data:{name},height:1,width}),
-			v('input',{...props,data:{name},type:'range'})
+			v('input',{...rangeProps,data:{name},type:'range'})
 		),
-		v('button',{},'+'),
-		v('input',{...props,data:{name},type:'number'})
+		v('button',{...btnProps,value:1},'+'),
+		v('input',{...rangeProps,data:{name},type:'number'})
 	)
 }
 export default silo
