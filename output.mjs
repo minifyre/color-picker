@@ -21,13 +21,13 @@ output=function output(editor)
 }
 silo.output=output
 silo.v=v
-output.render=function(picker)//@todo make this more performant!
-{//@todo switch to canvas backgrounds!
+output.render=function(picker)
+{
 	const newDom=output(picker)
 	v.flatUpdate(picker.shadowRoot,newDom,picker.dom)
 	this.dom=newDom
 
-	console.clear()
+	//@todo make this more performant! & integrate directly into v
 	const
 	{r,g,b,a}=picker.state,
 	tmp=[...picker.shadowRoot.querySelectorAll('canvas')]
