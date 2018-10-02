@@ -38,7 +38,7 @@ output.render=function(picker)
 		color=canvas.getAttribute('data-name'),
 		fn=`gradient${color.toUpperCase()}`,
 		gradient=ctx.createLinearGradient(0,0,255,1)
-		util[fn](r,g,b,a).forEach((color,i)=>gradient.addColorStop(i,color))
+		util[fn](r,g,b,a/100).forEach((color,i)=>gradient.addColorStop(i,color))
 		ctx.fillStyle=gradient
 		ctx.clearRect(0,0,255,1)
 		ctx.fillRect(0,0,255,1)
