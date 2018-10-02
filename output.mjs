@@ -62,15 +62,15 @@ hwb()
 */
 
 
-output.slider=function(label,opts)
+output.slider=function(legend,opts)
 {
 	const
-	name=label[0].toLowerCase(),
+	name=legend[0].toLowerCase(),
 	rangeProps=Object.assign({min:0,max:100,value:50},opts),
 	btnProps={data:{name,sensativity:150},on:{pointerdown:input.increment}},
 	width=rangeProps.max
-	return v('.row',{},
-		v('label',{},label),
+	return v('fieldset.row',{},
+		v('legend',{},legend),
 		v('button',{...btnProps,value:-1},'-'),
 		v('span.gradient',{},
 			v('canvas',{data:{name},height:1,width}),
