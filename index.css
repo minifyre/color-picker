@@ -6,15 +6,23 @@
 	height:100%;
 	width:100%;
 }
+
+.row
+{
+	display:flex;
+	flex-direction:row;
+}
+
 label
 {
 	display:block;
 }
-.row
+
+button
 {
-	border:1px solid #222;
-	margin-bottom:1rem;
-	padding:0.5rem;
+	min-height:1.5rem;
+	min-width:1.5rem;
+	padding:0;
 }
 
 input[type=range]
@@ -28,7 +36,7 @@ input[type=range]
 	{
 		-webkit-appearance:none;
 		border:0.05rem solid #222;
-		border-radius:0.2rem;
+		border-radius:0.1rem;
 		background:transparent;
 		cursor:pointer;
 		margin-top:0; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */

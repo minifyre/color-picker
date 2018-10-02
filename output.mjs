@@ -69,15 +69,17 @@ output.slider=function(legend,opts)
 	rangeProps=Object.assign({min:0,max:100,value:50},opts),
 	btnProps={data:{name,sensativity:150},on:{pointerdown:input.increment}},
 	width=rangeProps.max
-	return v('fieldset.row',{},
+	return v('fieldset',{},
 		v('legend',{},legend),
-		v('button',{...btnProps,value:-1},'-'),
-		v('span.gradient',{},
-			v('canvas',{data:{name},height:1,width}),
-			v('input',{...rangeProps,data:{name},type:'range'})
-		),
-		v('button',{...btnProps,value:1},'+'),
-		v('input',{...rangeProps,data:{name},type:'number'})
+		v('.row',{},
+			v('button',{...btnProps,value:-1},'-'),
+			v('span.gradient',{},
+				v('canvas',{data:{name},height:1,width}),
+				v('input',{...rangeProps,data:{name},type:'range'})
+			),
+			v('button',{...btnProps,value:1},'+'),
+			v('input',{...rangeProps,data:{name},type:'number'})
+		)
 	)
 }
 export default silo
