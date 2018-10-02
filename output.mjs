@@ -67,7 +67,7 @@ output.slider=function(label,opts)
 	const
 	name=label[0].toLowerCase(),
 	rangeProps=Object.assign({min:0,max:100,value:50},opts),
-	btnProps={data:{name},on:{pointerdown:input.increment}},
+	btnProps={data:{name,sensativity:150},on:{pointerdown:input.increment}},
 	width=rangeProps.max
 	return v('.row',{},
 		v('label',{},label),
