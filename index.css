@@ -32,7 +32,7 @@ input[type=range]
 		background:transparent;
 		cursor:pointer;
 		margin-top:0; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-		box-shadow:0 0 0.2rem #222;
+		box-shadow:0 0 0.2rem #222, inset 0 0 0.1rem #fff;
 		height:1.5rem;
 		width:1.5rem;
 	}
