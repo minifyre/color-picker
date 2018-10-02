@@ -66,12 +66,13 @@ output.slider=function(label,opts)
 {
 	const
 	props=Object.assign({min:0,max:100,value:50},opts),
+	width=props.max,
 	name=label[0].toLowerCase()
 	return v('.row',{},
 		v('label',{},label),
 		v('button',{},'-'),
 		v('span.gradient',{},
-			v('canvas',{data:{name},height:1,width:255}),
+			v('canvas',{data:{name},height:1,width}),
 			v('input',{...props,data:{name},type:'range'})
 		),
 		v('button',{},'+'),
