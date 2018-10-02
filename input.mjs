@@ -6,6 +6,7 @@ silo.input=function(evt,picker)
 }
 const {config,input,logic,util}=silo
 
+
 input.increment=function(evt)
 {
 	const
@@ -14,9 +15,14 @@ input.increment=function(evt)
 	[inc]=util.elAttrs2Nums(target,'value'),
 	range=target.parentElement.querySelector('[type="range"]'),
 	[max,min,oldVal]=util.elAttrs2Nums(range,'max,min,value'),
-	newVal=Math.max(min,Math.min(max,oldVal+inc)),
+	newVal=util.numWithinRange(min,oldVal+inc,max),
 	editor=path.find(x=>(x.tagName||'').toLowerCase()==='color-picker')
-	if(''+newVal==='NaN') console.log({min,max,oldVal,inc,newVal})
+
+
+
+	console.log(inc,max,min,oldVal,newVal)
 	if(oldVal!==newVal) editor.state[type]=newVal
+	//@todo how is this a string?
+	console.log(editor.state)
 }
 export default silo

@@ -8,6 +8,7 @@ const util=
 }
 
 util.elAttrs2Nums=(el,attrs)=>attrs.split(',').map(attr=>parseFloat(el.getAttribute(attr))),
+util.numWithinRange=(min,val,max)=>Math.max(min,Math.min(max,val))
 
 util.color={}
 util.color.rgba=(r,g,b,a)=>`rgba(${[r,g,b,a].join(',')})`
