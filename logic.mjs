@@ -15,7 +15,7 @@ logic.rgba2hexaStr=function(...args)
 }
 logic.hslaStr=(h,s,l,a=1)=>`hsla(${h},${s}%,${l}%,${a})`
 logic.rgbaStr=(r,g,b,a=1)=>`rgba(${r},${g},${b},${a})`
-logic.rgba2hslaStr=(...args)=>logic.hslaStr(logic.rgba2hsla(...args))
+logic.rgba2hslaStr=(...args)=>logic.hslaStr(...logic.rgba2hsla(...args))
 
 logic.hex2rgb=function(hex)
 {
