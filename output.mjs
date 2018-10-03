@@ -59,7 +59,10 @@ hsla()
 color()
 cmyk()
 hwb()
-*/
+
+hsb
+hsv
+color schemes*/
 
 
 output.slider=function(legend,opts)
