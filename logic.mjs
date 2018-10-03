@@ -6,9 +6,17 @@ function logic(opts)
 }
 const silo={config,logic,util}
 
-logic.rgba2hexa=(...args)=>'#'+args.map(num=>num.toString(16)).join('')
-logic.hslaStr=(h,s,l,a=1)=>`hsla(${h},${s}%,${l}%,${a})`,
-logic.rgbaStr=(r,g,b,a=1)=>`rgba(${r},${g},${b},${a})`,
+logic.rgba2hexaStr=function(...args)
+{
+	return '#'+args
+	.map(num=>num.toString(16))
+	.map(str=>['00','0',''][str.length]+str)//pad string
+	.join('')
+}
+logic.hslaStr=(h,s,l,a=1)=>`hsla(${h},${s}%,${l}%,${a})`
+logic.rgbaStr=(r,g,b,a=1)=>`rgba(${r},${g},${b},${a})`
+logic.rgba2hslaStr=(...args)=>logic.hslaStr(logic.rgba2hsla(...args))
+
 logic.hex2rgb=function(hex)
 {
 	//fcc to ffcccc
@@ -17,7 +25,6 @@ logic.hex2rgb=function(hex)
 	return hex.match(/#?(.{2})(.{2})(.{2})/).slice(1).map(str=>parseInt(str,16))
 }
 logic.hexToHsl=hex=>logic.rgb2hsl(logic.hex2rgb(hex))
-logic.rgba2hexa=(...args)=>'#'+args.map(num=>num.toString(16)).join('')
 logic.rgba2hsla=function(r,g,b,a=1)
 {
 	r/=255
