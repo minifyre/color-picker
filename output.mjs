@@ -23,7 +23,11 @@ output=function output(editor)
 			output.slider('Alpha',props(a,100)),
 		),
 		...[hexa,hsla,rgba]
-		.map(color=>v('output',{style:`background-color:${color};`},color))
+		.map(function(color)
+		{
+			const style=`background-color:${color};`
+			return v('output',{style,on:{pointerup:input.selectColor}},color)
+		})
 	]
 }
 silo.output=output

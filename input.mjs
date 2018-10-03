@@ -6,6 +6,15 @@ silo.input=function(evt,picker)
 }
 const {config,input,logic,util}=silo
 
+input.selectColor=function(evt)
+{
+	const
+	editor=evt.path.find(x=>(x.tagName||'').toLowerCase()==='color-picker'),
+	value=evt.target.innerHTML,
+	type='change'
+
+	editor.dispatchEvent(new CustomEvent(type,{type,detail:{value}}))
+}
 
 input.increment=function(evt)
 {//@todo fix bug where 0 displays as one in [type=number]
