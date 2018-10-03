@@ -69,7 +69,8 @@ input[type="range"]:focus
 	display:inline-flex;
 	position:relative;
 }
-.gradient canvas
+.gradient canvas,
+output::before
 {
 	background-color:#fff;
 	background-image:
@@ -85,7 +86,12 @@ input[type="range"]:focus
 }
 output
 {
-	text-align:center;
-	padding:0.25rem;
 	margin:0.125rem;
+	padding:0.25rem;
+	position:relative;
+	text-align:center;
+}
+output::before
+{
+	content:"";
 }
