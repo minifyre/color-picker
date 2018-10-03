@@ -8,42 +8,21 @@ logic.rgbaStr=(r,g,b,a=1)=>`rgba(${r},${g},${b},${a})`,
 
 
 
+logic.hex2rgb=function(hex)
+{
+	//fcc to ffcccc
+	if(hex.length===3) hex=hex.split('').map(char=>char+''+char).join('')
+	//[r,g,b]
+	return hex.match(/#?(.{2})(.{2})(.{2})/).slice(1).map(str=>parseInt(str,16))
+},
+
 
 color=
 {
-	hexToRgb:function(hex)
-	{
-		var c
-		if(hex.length!==6)
-		{//expand the short hex by doubling each character,fc0->ffcc00
-			hex=((function()
-			{
-				var j,len,results;
-				results=[];
-				for (j=0,len=hex.length; j<len; j++)
-				{
-					c=hex[j];
-					results.push(`${c}${c}`);
-				}
-				return results;
-			})()).join('');
-		}
-		color=hex.match(/#?(.{2})(.{2})(.{2})/).slice(1);
-		return color=((function()
-		{
-			var j,len,results;
-			results=[];
-			for (j=0,len=color.length; j<len; j++)
-			{
-				c=color[j];
-				results.push(parseInt(c,16));
-			}
-			return results;
-		})()).concat([1]);
-	},
+	
 	hexToHsl:function(hex)
 	{
-		return this.rgbToHsl(this.hexToRgb(hex));
+		return this.rgbToHsl(this.logic.hex2rgb(hex));
 	},
 	rgbToHex:function(rgb)
 	{
