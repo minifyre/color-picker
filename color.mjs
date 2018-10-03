@@ -1,8 +1,16 @@
-const
+export default function logic()
+{
+
+}
+logic.hslaStr=(h,s,l,a=1)=>`hsla(${h},${s}%,${l}%,${a})`,
+logic.rgbaStr=(r,g,b,a=1)=>`rgba(${r},${g},${b},${a})`,
+
+
+
+
+
 color=
 {
-	hslaStr:(h,s,l,a=1)=>`hsla(${h},${s}%,${l}%,${a})`,
-	rgbaStr:(r,g,b,a=1)=>`rgba(${r},${g},${b},${a})`,
 	hexToRgb:function(hex)
 	{
 		var c
@@ -138,9 +146,9 @@ color=
 		rt=hue+(1/3)
 		gt=hue
 		bt=hue-(1/3)
-		r=Math.round(this.hueToRgb(p,q,rt)*255)
-		g=Math.round(this.hueToRgb(p,q,gt)*255)
-		b=Math.round(this.hueToRgb(p,q,bt)*255)	
+		r=Math.round(this.hue2rgb(p,q,rt)*255)
+		g=Math.round(this.hue2rgb(p,q,gt)*255)
+		b=Math.round(this.hue2rgb(p,q,bt)*255)	
 		a=parseFloat(hsl[3])||1
 		return [r,g,b,a]
 	},
@@ -150,7 +158,7 @@ color=
 		if(!hsl) return false
 		return this.rgbToHex(this.hslToRgb(hsl))
 	},
-	hueToRgb:function(p,q,h)
+	hue2rgb:function(p,q,h)
 	{
 		h+=	h<0?1:
 			h>1?-1:
