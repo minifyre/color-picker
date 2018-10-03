@@ -6,21 +6,24 @@ output=function output(editor)
 {
 	const
 	{r,b,g,a}=editor.state,
-	color=util.color.rgba(r,g,b,a/100),
+	rgba=util.color.rgba(r,g,b,a/100),
 	hexa=logic.rgba2hexaStr(r,g,b,Math.round(a*255/100)),
 	hsla=logic.rgba2hslaStr(r,g,b,a/100),
 	update=evt=>input(evt,editor),
 	props=(value,max=255)=>({min:0,max,value,on:{input:update}})
 	return [v('style',{},silo.config.css),
-		v('div',{style:`background-color:${hexa};`},hexa),
-		v('div',{style:`background-color:${hsla};`},hsla),
-		v('fieldset',{},
-			v('legend',{style:`background-color:${color};`},color),
+		v('.tabs',{},
+			...['hexa','hsla','rgba']
+			.map(x=>v('button.tab',{class:editor.state.mode===x?'active':''},x))
+		),
+		v('div',{},
 			output.slider('Red',props(r)),
 			output.slider('Green',props(g)),
 			output.slider('Blue',props(b)),
 			output.slider('Alpha',props(a,100)),
-		)
+		),
+		...[hexa,hsla,rgba]
+		.map(color=>v('output',{style:`background-color:${color};`},color))
 	]
 }
 silo.output=output
