@@ -83,3 +83,9 @@ input[type="range"]:focus
 	width:100%;
 	z-index:-1;
 }
+output
+{
+	text-align:center;
+	padding:0.25rem;
+	margin:0.125rem;
+}
