@@ -152,12 +152,13 @@ color=
 	},
 	hueToRgb:function(p,q,h)
 	{
-		if(h<0) h+=1
-		if(h>1) h-=1
-		if((h*6)<1) return p+(q-p)*h*6
-		else if((h*2)<1) return q
-		else if((h*3)<2) return p+(q-p)*((2/3)-h)*6
-		else return p
+		h+=	h<0?1:
+			h>1?-1:
+				0
+		return	h*6<1?p+(q-p)*h*6:
+				h*2<1?q:
+				h*3<2?p+(q-p)*((2/3)-h)*6:
+				p
 	}
 }
 export default color
