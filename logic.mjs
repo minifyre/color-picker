@@ -7,8 +7,9 @@ function logic(opts)
 const silo={config,logic,util}
 
 
-logic.colorType=function(color)
+logic.colorType=function(txt)
 {
+	const color=txt.replace(/, /g,',')
 	if(/^#/.test(color))
 	{
 		const
@@ -23,11 +24,15 @@ logic.colorType=function(color)
 		.slice(1)
 		.toLowerCase()
 		.split('')
-		.every(char=>/[0-9a-f]/.text(char)),
+		.every(char=>/[0-9a-f]/.text(char))
 		return (valid&&types[color.length])||false		
 	}
-	//@todo named colors,rgb,rgba,hsl,hsla,cmyk,hwb,hsb,hsv
+	return	/^rgb\((\d{1,3}%?,\s?){2}\d+\)$/.test(color)?'rgb':
+			/^rgba\((\d{1,3}%?,\s?){3}(1|0?\.\d+)\)$/.test(color)?'rgba':
+			false
+	//@todo named colors,hsl,hsla,cmyk,hwb,hsb,hsv
 }
+//hex
 logic.hex2rgba=hex=>logic.hexa2rgba(hex+'f')
 logic.hexa2rgba=hexa=>logic.hheexxaa2rgba(hexa.slice(1).map(c=>c+c))
 logic.hheexx2rgba=hheexx=>logic.hheexxaa2rgba(hheexx+'ff')
@@ -36,6 +41,11 @@ logic.hheexxaa2rgba=function(hheexxaa)
 	const [r,g,b,a]=hheexxaa.slice(1).match(/.{2}/g).map(c=>parseInt(c,16))
 	return [r,g,b,a/255]
 }
+//rgb
+logic.rgb2rgba=rgb=>[...util.cssFn2arr(rgb),1]
+logic.rgba2rgba=rgba=>util.cssFn2arr(rgba)
+
+
 
 
 
@@ -54,13 +64,6 @@ logic.hslaStr=(h,s,l,a=1)=>`hsla(${h},${s}%,${l}%,${a})`
 logic.rgbaStr=(r,g,b,a=1)=>`rgba(${r},${g},${b},${a})`
 logic.rgba2hslaStr=(...args)=>logic.hslaStr(...logic.rgba2hsla(...args))
 
-logic.hex2rgb=function(hex)
-{
-	//fcc to ffcccc
-	if(hex.length===3) hex=hex.split('').map(char=>char+''+char).join('')
-	//[r,g,b]
-	return hex.match(/#?(.{2})(.{2})(.{2})/).slice(1).map(str=>parseInt(str,16))
-}
 logic.hexToHsl=hex=>logic.rgb2hsl(logic.hex2rgb(hex))
 logic.rgba2hsla=function(r,g,b,a=1)
 {
