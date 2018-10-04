@@ -9,7 +9,7 @@ const silo={config,logic,util}
 
 logic.colorType=function(txt)
 {
-	const color=txt.replace(/, /g,',')
+	const color=txt.toLowerCase().replace(/, /g,',')
 	if(/^#/.test(color))
 	{
 		const
@@ -32,6 +32,9 @@ logic.colorType=function(txt)
 			/^rgba\((\d{1,3}%?,\s?){3}(1|0?\.\d+)\)$/.test(color)?'rgba':
 			/^hsl\((\d{1,3}%?,\s?){2}\d+\)$/.test(color)?'hsl':
 			/^hsla\((\d{1,3}%?,\s?){3}(1|0?\.\d+)\)$/.test(color)?'hsla':
+			color==='black'?'named':
+			//@todo find a better way to detect named colors (is there a way to get the css list programatically?)
+			logic.namedColor2rgba().join('')!=='0001'?'named':
 			false
 	//@todo named colors,cmyk,hwb,hsb,hsv
 }
