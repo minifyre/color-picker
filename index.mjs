@@ -25,4 +25,16 @@ color.picker=class extends HTMLElement
 		v.flatUpdate(shadow,this.dom)
 		renderer=()=>output.render(this)
 	}
+	static get observedAttributes()
+	{
+		return ['value']
+	}
+	get value()
+	{
+		return this.state.value
+	}
+	set value(val)
+	{
+		return this.state.value=val
+	}
 }
