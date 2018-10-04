@@ -107,8 +107,37 @@ logic.rgba2hexStr=function(r,g,b,a=1)
 logic.hslaStr=(h,s,l,a=1)=>`hsla(${h},${s}%,${l}%,${a})`
 logic.rgba2rgbStr=(r,g,b,a=1)=>`rgba(${r},${g},${b},${a})`
 logic.rgba2hslStr=(...args)=>logic.hslaStr(...logic.rgba2hsla(...args))
-
-
+logic.rgba2hwbaStr=function(r,g,b,a=1)
+{
+	r/=255
+	g/=255
+	b/=255
+	const
+	[max,min]=[Math.max,Math.min].map(fn([r,g,b])),
+	diff=max-min,
+	tmp=diff===0?0:
+		r===max?((g-b)/diff):
+		g===max?(((b-r)/diff)+2):
+				(((r-g)/diff)+4)
+	return `hwba(${[(tmp%6)*360,min,1-max,a].join(',')})`
+}
+logic.rgba2cmykStr=function(r,g,b,a=1)
+{
+	const
+	max=Math.max(r,g,b)/255,
+	k=1-max,
+	[c,m,y]=k===1?[0,0,0]:[r,g,b].map(x=>y=(1-(x/255)-k)/(1-k)),
+	arr=a===1?[c,m,y,k]:[c,m,y,k,a]
+	return `cmyk(${arr.join(',')})`
+}
+logic.hwba2rgba=function(h,w,b,a=1)
+{
+	const
+	sum=w+b,
+	[r,g,blue]=logic.hsla2rgba(h,1,0.50).map(x=>x/255)
+	if(sum>1) [w,b]=[w,b].map(x=>parseFloat((x/sum).toFixed(2)))
+	return [...[r,g,blue].map(x=>((x*(1-w-b))+w)*255),a]
+}
 
 logic.hexToHsl=hex=>logic.rgb2hsl(logic.hex2rgb(hex))
 logic.rgba2hsla=function(r,g,b,a=1)
@@ -172,5 +201,6 @@ logic.hue2rgb=function(p,q,h)
 			h*3<2?p+(q-p)*((2/3)-h)*6:
 			p
 }
+
 
 export default silo
