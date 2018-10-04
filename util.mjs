@@ -19,5 +19,6 @@ util.gradientG=(r,g,b,a)=>[rgba(r,0,b,a),rgba(r,255,b,a)]
 util.gradientB=(r,g,b,a)=>[rgba(r,g,0,a),rgba(r,g,255,a)]
 util.gradientA=(r,g,b,a)=>[rgba(r,g,b,0),rgba(r,g,b,100)]
 
+util.evt2customEl=({path})=>path.find(x=>(x.tagName||'').match('-'))
 
 export default util
