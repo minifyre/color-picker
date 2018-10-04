@@ -93,21 +93,16 @@ logic.hsla2rgba=function(hsla)
 }
 logic.rgb2rgba=rgb=>[...util.cssFn2arr(rgb),1]
 logic.rgba2rgba=rgba=>util.cssFn2arr(rgba)
-
-
-
-
-
-
-
-
 logic.rgba2hexStr=function(r,g,b,a=1)
 {
 	a=Math.round(a*255)
-	return '#'+(a===255?[r,g,b]:[r,g,b,a])
+	const
+	dec=a===255?[r,g,b]:[r,g,b,a],//omit unecessary alpha
+	hex=dec
 	.map(num=>num.toString(16))
-	.map(str=>['00','0',''][str.length]+str)//pad string
-	.join('')
+	.map(str=>['00','0',''][str.length]+str),//pad string
+	shorten=hex.map(x=>x.split('')).every(([a,b])=>a===b)
+	return '#'+(shorten?hex.map(x=>x[0]):hex).join('')
 }
 logic.hslaStr=(h,s,l,a=1)=>`hsla(${h},${s}%,${l}%,${a})`
 logic.rgba2rgbStr=(r,g,b,a=1)=>`rgba(${r},${g},${b},${a})`

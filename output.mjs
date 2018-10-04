@@ -6,7 +6,7 @@ output=function output(editor)
 {
 	const
 	{r,b,g,a}=editor.state,
-	tmp=console.log(a),
+	//@todo simplify
 	rgba=logic.rgba2rgbStr(r,g,b,a),
 	hexa=logic.rgba2hexStr(r,g,b,a),
 	hsla=logic.rgba2hslStr(r,g,b,a),
