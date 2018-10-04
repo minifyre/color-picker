@@ -32,15 +32,16 @@ logic.colorType=function(txt)
 			/^rgba\((\d{1,3}%?,\s?){3}(1|0?\.\d+)\)$/.test(color)?'rgba':
 			/^hsl\((\d{1,3}%?,\s?){2}\d+\)$/.test(color)?'hsl':
 			/^hsla\((\d{1,3}%?,\s?){3}(1|0?\.\d+)\)$/.test(color)?'hsla':
+			//@todo cmyk can have an opacity value as well
 			color==='black'?'named':
 			//@todo find a better way to detect named colors (is there a way to get the css list programatically?)
 			logic.namedColor2rgba().join('')!=='0001'?'named':
 			false
-	//@todo named colors,cmyk,hwb,hsb,hsv
+	//@todo cmyk,hwb,hsb,hsv
 }
 logic.namedColor2rgba=function(fillStyle)
 {
-	const
+	const//@todo find a way to allow this on node JS without a giant list
 	can=Object.assign(document.createElement('canvas'),{height:1,width:1}),
 	ctx=Object.assign(can.getContext('2d'),{fillStyle})
 	ctx.fillRect(0,0,1,1)
@@ -57,6 +58,13 @@ logic.hheexxaa2rgba=function(hheexxaa)
 	return [r,g,b,a/255]
 }
 //css functions
+logic.cmyk2rgba=function(cmyk)
+{
+	const cmykArr=util.cssFn2arr(cmyk)
+	if(cmykArr.length===4) cmykArr.push(100)
+	const [c,m,y,k,a]=cmykArr.map(x=>x/100)
+	return [...[c,m,y].map(x=>Math.round(255-((Math.min(1,x*(1-k)+k))*255))),a]
+}
 logic.hsl2rgba=hsl=>logic.hsla2rgba(hsl.replace(/\(/,'a(').replace(/\)/,',1'))
 logic.hsla2rgba=function(hsla)
 {
