@@ -6,9 +6,10 @@ output=function output(editor)
 {
 	const
 	{r,b,g,a}=editor.state,
-	rgba=util.color.rgba(r,g,b,a),
-	hexa=logic.rgba2hexaStr(r,g,b,Math.round(a*255)),
-	hsla=logic.rgba2hslaStr(r,g,b,a),
+	tmp=console.log(a),
+	rgba=logic.rgba2rgbStr(r,g,b,a),
+	hexa=logic.rgba2hexStr(r,g,b,a),
+	hsla=logic.rgba2hslStr(r,g,b,a),
 	update=evt=>input(evt,editor),
 	props=(value,opts)=>(Object.assign({min:0,max:255,step:1,value,on:{input:update}},opts))
 	return [v('style',{},silo.config.css),
