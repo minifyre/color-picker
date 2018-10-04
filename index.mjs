@@ -25,4 +25,20 @@ color.picker=class extends HTMLElement
 		v.flatUpdate(shadow,this.dom)
 		renderer=()=>output.render(this)
 	}
+	static get observedAttributes()
+	{
+		return ['value']
+	}
+	get value()
+	{
+		return ''+this.state.value//don't return the proxy
+	}
+	set value(value)
+	{
+		let type=logic.colorType(value)
+		if(!type) value='#000',type='hex'
+		const [r,g,b,a]=logic[type+'2rgba'](value)
+		Object.assign(this.state,{r,g,b,a,value})
+		return value
+	}
 }
