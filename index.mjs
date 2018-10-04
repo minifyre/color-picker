@@ -33,8 +33,12 @@ color.picker=class extends HTMLElement
 	{
 		return this.state.value
 	}
-	set value(val)
+	set value(value)
 	{
-		return this.state.value=val
+		let type=logic.colorType(value)
+		if(!type) value='#000',type='hex'
+		const [r,g,b,a]=logic[type+'2rgba'](value)
+		Object.assign(this.state,{r,g,b,a,value})
+		return value
 	}
 }
