@@ -12,7 +12,7 @@ input.selectColor=function(evt)
 	editor=evt.path.find(x=>(x.tagName||'').toLowerCase()==='color-picker'),
 	value=evt.target.innerHTML,
 	type='change'
-
+	editor.state.value=value
 	editor.dispatchEvent(new CustomEvent(type,{type,detail:{value}}))
 }
 

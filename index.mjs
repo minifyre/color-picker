@@ -31,7 +31,7 @@ color.picker=class extends HTMLElement
 	}
 	get value()
 	{
-		return this.state.value
+		return ''+this.state.value//don't return the proxy
 	}
 	set value(value)
 	{

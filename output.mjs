@@ -11,6 +11,7 @@ output=function output(editor)
 	hexa=logic.rgba2hexStr(r,g,b,a),
 	hsla=logic.rgba2hslStr(r,g,b,a),
 	update=evt=>input(evt,editor),
+	//@todo adjusting the slider is not always updating the color previews
 	props=(value,opts)=>(Object.assign({min:0,max:255,step:1,value,on:{input:update}},opts))
 	return [v('style',{},silo.config.css),
 		v('.tabs',{},
