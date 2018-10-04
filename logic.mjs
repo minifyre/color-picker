@@ -24,7 +24,7 @@ logic.colorType=function(txt)
 		.slice(1)
 		.toLowerCase()
 		.split('')
-		.every(char=>/[0-9a-f]/.text(char))
+		.every(char=>/[0-9a-f]/.test(char))
 		return (valid&&types[color.length])||false		
 	}
 	//@todo simplify by validating css fn & then figuring out what type
@@ -50,7 +50,7 @@ logic.namedColor2rgba=function(fillStyle)
 }
 //hex codes
 logic.hex2rgba=hex=>logic.hexa2rgba(hex+'f')
-logic.hexa2rgba=hexa=>logic.hheexxaa2rgba(hexa.slice(1).map(c=>c+c))
+logic.hexa2rgba=hexa=>logic.hheexxaa2rgba('#'+hexa.slice(1).split('').map(c=>c+c).join(''))
 logic.hheexx2rgba=hheexx=>logic.hheexxaa2rgba(hheexx+'ff')
 logic.hheexxaa2rgba=function(hheexxaa)
 {
