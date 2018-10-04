@@ -6,11 +6,11 @@ output=function output(editor)
 {
 	const
 	{r,b,g,a}=editor.state,
-	rgba=util.color.rgba(r,g,b,a/100),
-	hexa=logic.rgba2hexaStr(r,g,b,Math.round(a*255/100)),
-	hsla=logic.rgba2hslaStr(r,g,b,a/100),
+	rgba=util.color.rgba(r,g,b,a),
+	hexa=logic.rgba2hexaStr(r,g,b,Math.round(a*255)),
+	hsla=logic.rgba2hslaStr(r,g,b,a),
 	update=evt=>input(evt,editor),
-	props=(value,max=255)=>({min:0,max,value,on:{input:update}})
+	props=(value,opts)=>(Object.assign({min:0,max:255,step:1,value,on:{input:update}},opts))
 	return [v('style',{},silo.config.css),
 		v('.tabs',{},
 			...['hexa','hsla','rgba']
@@ -20,7 +20,7 @@ output=function output(editor)
 			output.slider('Red',props(r)),
 			output.slider('Green',props(g)),
 			output.slider('Blue',props(b)),
-			output.slider('Alpha',props(a,100)),
+			output.slider('Alpha',props(a,{max:1,step:0.01})),
 		),
 		...[hexa,hsla,rgba]
 		.map(function(color)
@@ -49,7 +49,7 @@ output.render=function(picker)
 		color=canvas.getAttribute('data-name'),
 		fn=`gradient${color.toUpperCase()}`,
 		gradient=ctx.createLinearGradient(0,0,255,1)
-		util[fn](r,g,b,a/100).forEach((color,i)=>gradient.addColorStop(i,color))
+		util[fn](r,g,b,a).forEach((color,i)=>gradient.addColorStop(i,color))
 		ctx.fillStyle=gradient
 		ctx.clearRect(0,0,255,1)
 		ctx.fillRect(0,0,255,1)
@@ -61,7 +61,7 @@ output.slider=function(legend,opts)
 {
 	const
 	name=legend[0].toLowerCase(),
-	rangeProps=Object.assign({min:0,max:100,value:50},opts),
+	rangeProps=Object.assign({min:0,max:100,step:1,value:50},opts),
 	btnProps={data:{name,sensativity:150},on:{pointerdown:input.increment}},
 	width=rangeProps.max
 	return v('fieldset',{},

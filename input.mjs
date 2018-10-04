@@ -22,14 +22,15 @@ input.increment=function(evt)
 	const
 	{path,target}=evt,
 	type=target.getAttribute('data-name'),
-	[inc,sensativity]=util.elAttrs2Nums(target,'value,data-sensativity'),
+	[direction,sensativity]=util.elAttrs2Nums(target,'value,data-sensativity'),
 	range=target.parentElement.querySelector('[type="range"]'),
 	editor=path.find(x=>(x.tagName||'').toLowerCase()==='color-picker'),
 	update=function()
 	{
 		const
-		[max,min,oldVal]=util.elAttrs2Nums(range,'max,min,value'),
-		newVal=util.numWithinRange(min,oldVal+inc,max)
+		[max,min,inc,oldVal]=util.elAttrs2Nums(range,'max,min,step,value'),
+		newVal=util.numWithinRange(min,oldVal+(inc*direction),max)
+		//@todo tiny numbers (e.g. 0.01 break this & the decimal places)
 		if(oldVal!==newVal) editor.state[type]=newVal
 		timer=setTimeout(update,sensativity)
 	},
