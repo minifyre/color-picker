@@ -27,12 +27,15 @@ logic.colorType=function(txt)
 		.every(char=>/[0-9a-f]/.text(char))
 		return (valid&&types[color.length])||false		
 	}
+	//@todo simplify by validating css fn & then figuring out what type
 	return	/^rgb\((\d{1,3}%?,\s?){2}\d+\)$/.test(color)?'rgb':
 			/^rgba\((\d{1,3}%?,\s?){3}(1|0?\.\d+)\)$/.test(color)?'rgba':
+			/^hsl\((\d{1,3}%?,\s?){2}\d+\)$/.test(color)?'hsl':
+			/^hsla\((\d{1,3}%?,\s?){3}(1|0?\.\d+)\)$/.test(color)?'hsla':
 			false
-	//@todo named colors,hsl,hsla,cmyk,hwb,hsb,hsv
+	//@todo named colors,cmyk,hwb,hsb,hsv
 }
-//hex
+//hex codes
 logic.hex2rgba=hex=>logic.hexa2rgba(hex+'f')
 logic.hexa2rgba=hexa=>logic.hheexxaa2rgba(hexa.slice(1).map(c=>c+c))
 logic.hheexx2rgba=hheexx=>logic.hheexxaa2rgba(hheexx+'ff')
@@ -41,10 +44,35 @@ logic.hheexxaa2rgba=function(hheexxaa)
 	const [r,g,b,a]=hheexxaa.slice(1).match(/.{2}/g).map(c=>parseInt(c,16))
 	return [r,g,b,a/255]
 }
-//rgb
+//css functions
+logic.hsl2rgba=hsl=>logic.hsla2rgba(hsl.replace(/\(/,'a(').replace(/\)/,',1'))
+logic.hsla2rgba=function(hsla)
+{
+	const 
+	[h,s,l,a]=util.cssFn2arr(hsla),
+	[hue,sat,lum]=[h/360,s/100,l/100],
+
+	q=	lum<=.5?lum*(1+sat):
+				lum+sat-(lum*sat),
+	p=2*lum-q,
+	rt=hue+(1/3),
+	gt=hue,
+	bt=hue-(1/3),
+
+	[r,g,b]=
+	[
+		[rp,q,rt],
+		[p,q,gt],
+		[p,q,bt]
+	]
+	.map(logic.hue2rgb)
+	.map(num=>num*255)
+	.map(Math.round)
+
+	return [r,g,b,a]
+}
 logic.rgb2rgba=rgb=>[...util.cssFn2arr(rgb),1]
 logic.rgba2rgba=rgba=>util.cssFn2arr(rgba)
-
 
 
 
