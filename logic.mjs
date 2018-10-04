@@ -28,8 +28,16 @@ logic.colorType=function(color)
 	}
 	//@todo named colors,rgb,rgba,hsl,hsla,cmyk,hwb,hsb,hsv
 }
+logic.hex2rgba=hex=>logic.hexa2rgba(hex+'f')
+logic.hexa2rgba=hexa=>logic.hheexxaa2rgba(hexa.slice(1).map(c=>c+c))
+logic.hheexx2rgba=hheexx=>logic.hheexxaa2rgba(hheexx+'ff')
+logic.hheexxaa2rgba=function(hheexxaa)
+{
+	const [r,g,b,a]=hheexxaa.slice(1).match(/.{2}/g).map(c=>parseInt(c,16))
+	return [r,g,b,a/255]
+}
 
-logic.hex2rgba=hex=>[...hex.slice(1).split('').map(c=>parseInt(c+''+c,16)*15),1]
+
 
 
 
