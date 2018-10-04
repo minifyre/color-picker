@@ -35,6 +35,15 @@ logic.colorType=function(txt)
 			false
 	//@todo named colors,cmyk,hwb,hsb,hsv
 }
+logic.namedColor2rgba=function(fillStyle)
+{
+	const
+	can=Object.assign(document.createElement('canvas'),{height:1,width:1}),
+	ctx=Object.assign(can.getContext('2d'),{fillStyle})
+	ctx.fillRect(0,0,1,1)
+	const [r,g,b,a]=ctx.getImageData(0,0,1,1).data
+	return [r,g,b,a/255]
+}
 //hex codes
 logic.hex2rgba=hex=>logic.hexa2rgba(hex+'f')
 logic.hexa2rgba=hexa=>logic.hheexxaa2rgba(hexa.slice(1).map(c=>c+c))
