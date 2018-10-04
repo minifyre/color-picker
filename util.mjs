@@ -26,7 +26,7 @@ util.cssFn2arr=function(txt)
 	return txt
 	.replace(/^\w+\(/,'')
 	.replace(/\)$/,'')
-	.replace(/%/,'')
+	.replace(/%/g,'')
 	.split(/, */g)
 	.map(num=>parseFloat(num))
 }
