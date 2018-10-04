@@ -6,6 +6,35 @@ function logic(opts)
 }
 const silo={config,logic,util}
 
+
+logic.colorType=function(color)
+{
+	if(/^#/.test(color))
+	{
+		const
+		types=
+		{
+			4:'hex',
+			5:'hexa',
+			7:'hheexx',
+			9:'hheexxaa'
+		},
+		valid=color
+		.slice(1)
+		.toLowerCase()
+		.split('')
+		.every(char=>/[0-9a-f]/.text(char)),
+		return (valid&&types[color.length])||false		
+	}
+	//@todo named colors,rgb,rgba,hsl,hsla,cmyk,hwb,hsb,hsv
+}
+
+logic.hex2rgba=hex=>[...hex.slice(1).split('').map(c=>parseInt(c+''+c,16)*15),1]
+
+
+
+
+
 logic.rgba2hexaStr=function(...args)
 {
 	return '#'+args

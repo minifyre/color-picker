@@ -55,25 +55,6 @@ output.render=function(picker)
 		ctx.fillRect(0,0,255,1)
 	})
 }
-/*
-named colors
-#rgb
-#rgba
-#rrggbb
-#rrggbbaa
-rgb()
-rgba()
-hsl()
-hsla()
-
-[css4?](https://developer.mozilla.org/en-US/docs/Web/CSS/color#Specifications)
-color()
-cmyk()
-hwb()
-
-hsb
-hsv
-color schemes*/
 
 
 output.slider=function(legend,opts)
