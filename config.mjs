@@ -6,6 +6,7 @@ config.state=
 	b:0,
 	a:1,
 	mode:'rgba',
-	value:'#000'
+	value:'#000',
+	type:'color-picker'
 }
 export default config
