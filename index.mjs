@@ -20,7 +20,7 @@ color.picker=class extends HTMLElement
 		shadow=this.attachShadow({mode:'open'}),
 		initalState=logic(state)
 		let renderer=x=>x
-		this.state=truth(initalState,(...args)=>renderer(args))
+		this.state=truth(initalState,(...args)=>renderer(args)).state
 		this.dom=output(this)
 		v.flatUpdate(shadow,this.dom)
 		renderer=()=>output.render(this)
