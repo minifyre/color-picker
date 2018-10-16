@@ -10,7 +10,6 @@ export default async function color(url='/node_modules/color-picker/')
 
 	customElements.define('color-picker',color.picker)
 }
-Object.assign(color,{config,input,logic,output,util})
 color.picker=class extends HTMLElement
 {
 	constructor(state={})
@@ -42,3 +41,4 @@ color.picker=class extends HTMLElement
 		return value
 	}
 }
+Object.assign(color,silo,{picker:color.picker})
