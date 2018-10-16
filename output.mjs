@@ -1,7 +1,7 @@
 import silo from './input.mjs'
-import v from './node_modules/v/v.mjs'
 const
 {config,input,logic,util}=silo,
+{v}=util
 output=function output(editor)
 {
 	const
@@ -32,8 +32,6 @@ output=function output(editor)
 		})
 	]
 }
-silo.output=output
-silo.v=v
 output.render=function(picker)
 {
 	const newDom=output(picker)
@@ -79,4 +77,4 @@ output.slider=function(legend,opts)
 		)
 	)
 }
-export default silo
+export default Object.assign(silo,{output})
