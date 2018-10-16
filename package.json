@@ -1,0 +1,13 @@
+{
+	"name": "color-picker",
+	"description": "Another color picker wrapped in a custom element.",
+	"homepage": "https://github.com/minifyre/color-picker",
+	"license": "MIT",
+	"version": "0.5.0",
+	"dependencies": {
+		"pane-viewer":"minifyre/pane-viewer"
+	},
+	"devDependencies": {
+		"cherub": "minifyre/cherub"
+	}
+}

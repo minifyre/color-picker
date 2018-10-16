@@ -1,24 +1,24 @@
 import silo from './input.mjs'
-import v from './node_modules/v/v.mjs'
 const
 {config,input,logic,util}=silo,
-output=function output(editor)
+{v}=util
+function output(picker)
 {
 	const
-	{r,b,g,a}=editor.state,
+	{r,b,g,a}=picker.state,
 	//@todo simplify
 	rgba=logic.rgba2rgbStr(r,g,b,a),
 	hexa=logic.rgba2hexStr(r,g,b,a),
 	hsla=logic.rgba2hslStr(r,g,b,a),
-	update=evt=>input(evt,editor),
+	update=evt=>input(evt,picker),
 	//@todo adjusting the slider is not always updating the color previews
 	props=(value,opts)=>(Object.assign({min:0,max:255,step:1,value,on:{input:update}},opts))
 	return [v('style',{},silo.config.css),
 		v('.tabs',{},
 			...['hexa','hsla','rgba']
-			.map(x=>v('button.tab',{class:editor.state.mode===x?'active':''},x))
+			.map(x=>v('button.tab',{class:picker.state.mode===x?'active':''},x))
 		),
-		v('div',{},
+		v('div',{on:{render:output.renderSliderGradients(picker)}},
 			output.slider('Red',props(r)),
 			output.slider('Green',props(g)),
 			output.slider('Blue',props(b)),
@@ -32,18 +32,11 @@ output=function output(editor)
 		})
 	]
 }
-silo.output=output
-silo.v=v
-output.render=function(picker)
+output.renderSliderGradients=function(picker)//@todo make this more performant
 {
-	const newDom=output(picker)
-	v.flatUpdate(picker.shadowRoot,newDom,picker.dom)
-	this.dom=newDom
+	const {r,g,b,a}=picker.state
 
-	//@todo make this more performant! & integrate directly into v
-	const
-	{r,g,b,a}=picker.state,
-	tmp=[...picker.shadowRoot.querySelectorAll('canvas')]
+	;[...picker.shadowRoot.querySelectorAll('canvas')]
 	.forEach(function(canvas)
 	{
 		const
@@ -57,8 +50,6 @@ output.render=function(picker)
 		ctx.fillRect(0,0,255,1)
 	})
 }
-
-
 output.slider=function(legend,opts)
 {
 	const
@@ -79,4 +70,4 @@ output.slider=function(legend,opts)
 		)
 	)
 }
-export default silo
+export default Object.assign(silo,{output})
