@@ -1,4 +1,5 @@
-const config={}
+import silo from './node_modules/pane-viewer/index.mjs'
+const {config}=silo
 config.state=
 {
 	r:0,
@@ -9,4 +10,4 @@ config.state=
 	value:'#000',
 	type:'color-picker'
 }
-export default config
+export default silo
