@@ -11,18 +11,17 @@ export default async function color(url='/node_modules/color-picker/')
 
 	customElements.define('color-picker',color.picker)
 }
-color.picker=class extends HTMLElement
+color.picker=class extends silo.viewer
 {
 	constructor(state={})
 	{
 		super()
 		const
-		shadow=this.attachShadow({mode:'open'}),
 		initalState=logic(state)
 		let renderer=x=>x
 		this.state=truth(initalState,(...args)=>renderer(args)).state
 		this.dom=output(this)
-		v.flatUpdate(shadow,this.dom)
+		v.flatUpdate(this.shadowRoot,this.dom)
 		renderer=()=>output.render(this)
 	}
 	static get observedAttributes()
