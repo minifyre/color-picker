@@ -1,11 +1,5 @@
-import config from './config.mjs'
-import util from './util.mjs'
-function logic(opts)
-{
-	return Object.assign({},config.state,opts)
-}
-const silo={config,logic,util}
-
+import silo from './util.mjs'
+const {config,logic,util}=silo
 
 logic.colorType=function(txt)
 {
@@ -201,6 +195,5 @@ logic.hue2rgb=function(p,q,h)
 			h*3<2?p+(q-p)*((2/3)-h)*6:
 			p
 }
-
 
 export default silo
