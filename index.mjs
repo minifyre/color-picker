@@ -16,13 +16,12 @@ color.picker=class extends silo.viewer
 	constructor(state={})
 	{
 		super()
-		const
-		initalState=logic(state)
 		let renderer=x=>x
-		this.state=truth(initalState,(...args)=>renderer(args)).state
-		this.dom=output(this)
-		v.flatUpdate(this.shadowRoot,this.dom)
-		renderer=()=>output.render(this)
+		this.state=truth(logic(state),(...args)=>renderer(args)).state
+		this.render=renderer=v.render(this.shadowRoot,this,output)
+		// this.dom=output(this)
+		// v.flatUpdate(this.shadowRoot,this.dom)
+		// renderer=()=>output.render(this)
 	}
 	static get observedAttributes()
 	{
