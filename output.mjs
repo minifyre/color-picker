@@ -2,7 +2,7 @@ import silo from './input.mjs'
 const
 {config,input,logic,util}=silo,
 {v}=util
-output=function output(editor)
+function output(editor)
 {
 	const
 	{r,b,g,a}=editor.state,
