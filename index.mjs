@@ -10,6 +10,7 @@ export default async function color(url='/node_modules/color-picker/')
 	config.css=css
 
 	customElements.define('color-picker',color.picker)
+	//@todo use util.mkCustomEl
 }
 color.picker=class extends silo.viewer
 {
@@ -23,14 +24,14 @@ color.picker=class extends silo.viewer
 	}
 	get value()
 	{
-		return ''+this.state.value//don't return the proxy
+		return ''+this.state.file.value//don't return the proxy
 	}
 	set value(value)
 	{
 		let type=logic.colorType(value)
 		if(!type) value='#000',type='hex'
 		const [r,g,b,a]=logic[type+'2rgba'](value)
-		Object.assign(this.state,{r,g,b,a,value})
+		Object.assign(this.state.file,{r,g,b,a,value})
 		return value
 	}
 }

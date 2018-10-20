@@ -2,7 +2,7 @@ import silo from './logic.mjs'
 silo.input=function(evt,picker)
 {
 	//default event hanlder
-	picker.state[evt.target.getAttribute('data-name')]=parseFloat(evt.target.value)
+	picker.state.file[evt.target.getAttribute('data-name')]=parseFloat(evt.target.value)
 }
 const {config,input,logic,util}=silo
 
@@ -12,7 +12,7 @@ input.selectColor=function(evt)
 	editor=evt.path.find(x=>(x.tagName||'').toLowerCase()==='color-picker'),
 	value=evt.target.innerHTML,
 	type='change'
-	editor.state.value=value
+	editor.state.file.value=value
 	editor.dispatchEvent(new CustomEvent(type,{type,detail:{value}}))
 }
 
@@ -31,7 +31,7 @@ input.increment=function(evt)
 		[max,min,inc,oldVal]=util.elAttrs2Nums(range,'max,min,step,value'),
 		newVal=util.numWithinRange(min,oldVal+(inc*direction),max)
 		//@todo tiny numbers (e.g. 0.01 break this & the decimal places)
-		if(oldVal!==newVal) editor.state[type]=newVal
+		if(oldVal!==newVal) editor.state.file[type]=newVal
 		timer=setTimeout(update,sensativity)
 	},
 	release=function()

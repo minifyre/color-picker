@@ -5,7 +5,7 @@ const
 function output(picker)
 {
 	const
-	{r,b,g,a}=picker.state,
+	{r,b,g,a}=picker.state.file,
 	//@todo simplify
 	rgba=logic.rgba2rgbStr(r,g,b,a),
 	hexa=logic.rgba2hexStr(r,g,b,a),
@@ -16,7 +16,7 @@ function output(picker)
 	return [v('style',{},silo.config.css),
 		v('.tabs',{},
 			...['hexa','hsla','rgba']
-			.map(x=>v('button.tab',{class:picker.state.mode===x?'active':''},x))
+			.map(x=>v('button.tab',{class:picker.state.view.mode===x?'active':''},x))
 		),
 		v('div',{on:{render:output.renderSliderGradients(picker)}},
 			output.slider('Red',props(r)),
@@ -34,7 +34,7 @@ function output(picker)
 }
 output.renderSliderGradients=function(picker)//@todo make this more performant
 {
-	const {r,g,b,a}=picker.state
+	const {r,g,b,a}=picker.state.file
 
 	;[...picker.shadowRoot.querySelectorAll('canvas')]
 	.forEach(function(canvas)
