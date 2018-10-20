@@ -2,13 +2,18 @@ import silo from './node_modules/pane-viewer/index.mjs'
 const {config}=silo
 config.state=
 {
-	file:{},//@todo integrate rgba here?
-	r:0,
-	g:0,
-	b:0,
-	a:1,
-	mode:'rgba',
-	value:'#000',
-	type:'color-picker'
+	file:
+	{
+		r:0,
+		g:0,
+		b:0,
+		a:1,
+		value:'#000'
+	},
+	view:
+	{
+		mode:'rgba',
+		type:'color-picker'
+	}
 }
 export default silo
