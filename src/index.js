@@ -1,9 +1,8 @@
-import silo from './output.mjs'
-const
-{config,input,logic,output,util}=silo,
-{truth,v}=util
+import silo from './node_modules/silo/index.js'
+import truth from './node_modules/truth/truth.mjs'
+import v from './node_modules/v/v.mjs'
 
-export default async function color(url='/node_modules/color-picker/')
+export default silo(async function color(url='/node_modules/color-picker/')
 {
 	const
 	[css]=await util.importFiles([url+'index.css'])
@@ -11,8 +10,8 @@ export default async function color(url='/node_modules/color-picker/')
 
 	customElements.define('color-picker',color.picker)
 	//@todo use util.mkCustomEl
-}
-color.picker=class extends silo.viewer
+})
+color.picker=class extends silo.customElement
 {
 	constructor(state={})
 	{
@@ -35,4 +34,3 @@ color.picker=class extends silo.viewer
 		return value
 	}
 }
-Object.assign(color,silo,{picker:color.picker})
