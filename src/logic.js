@@ -1,6 +1,3 @@
-import silo from './util.mjs'
-const {config,logic,util}=silo
-
 logic.colorType=function(txt)
 {
 	const color=txt.toLowerCase().replace(/, /g,',')
@@ -195,5 +192,3 @@ logic.hue2rgb=function(p,q,h)
 			h*3<2?p+(q-p)*((2/3)-h)*6:
 			p
 }
-
-export default silo

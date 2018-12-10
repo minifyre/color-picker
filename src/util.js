@@ -1,6 +1,3 @@
-import silo from './config.mjs'
-const {util}=silo
-
 util.elAttrs2Nums=(el,attrs)=>attrs.split(',').map(attr=>parseFloat(el.getAttribute(attr))),
 util.numWithinRange=(min,val,max)=>Math.max(min,Math.min(max,val))
 
@@ -24,5 +21,3 @@ util.cssFn2arr=function(txt)
 	.split(/, */g)
 	.map(num=>parseFloat(num))
 }
-
-export default silo

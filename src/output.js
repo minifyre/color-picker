@@ -1,8 +1,4 @@
-import silo from './input.mjs'
-const
-{config,input,logic,util}=silo,
-{v}=util
-function output(picker)
+output.render=function(picker)
 {
 	const
 	{r,b,g,a}=picker.state.file,
@@ -70,4 +66,3 @@ output.slider=function(legend,opts)
 		)
 	)
 }
-export default Object.assign(silo,{output})

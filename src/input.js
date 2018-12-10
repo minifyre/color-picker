@@ -1,11 +1,8 @@
-import silo from './logic.mjs'
 silo.input=function(evt,picker)
 {
 	//default event hanlder
 	picker.state.file[evt.target.getAttribute('data-name')]=parseFloat(evt.target.value)
 }
-const {config,input,logic,util}=silo
-
 input.selectColor=function(evt)
 {
 	const
@@ -15,7 +12,6 @@ input.selectColor=function(evt)
 	editor.state.file.value=value
 	editor.dispatchEvent(new CustomEvent(type,{type,detail:{value}}))
 }
-
 input.increment=function(evt)
 {//@todo fix bug where 0 displays as one in [type=number]
 	let timer
@@ -44,4 +40,3 @@ input.increment=function(evt)
 	target.addEventListener('pointerup',release)
 	update()
 }
-export default silo
